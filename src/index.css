@@ -6,6 +6,27 @@ html, body, #root {
   height: 100%;
   margin: 0;
   padding: 0;
+  overscroll-behavior: none;
+}
+
+html, body {
+  touch-action: manipulation;
+  -webkit-text-size-adjust: 100%;
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+input, textarea {
+  -webkit-user-select: text;
+  user-select: text;
 }
 
 .no-scrollbar::-webkit-scrollbar {
