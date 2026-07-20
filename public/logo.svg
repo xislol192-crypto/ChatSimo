@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="fcsGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#25D366" />
+      <stop offset="1" stop-color="#087691" />
+    </linearGradient>
+  </defs>
+  <rect x="0" y="0" width="1024" height="1024" rx="210" fill="url(#fcsGrad)" />
+  <ellipse cx="230" cy="150" rx="520" ry="380" fill="#ffffff" opacity="0.06" />
+  <rect x="192" y="210" width="560" height="430" rx="90" fill="#ffffff" />
+  <polygon points="302,634 262,730 402,634" fill="#ffffff" />
+  <rect x="544" y="584" width="330" height="250" rx="60" fill="none" stroke="#ffffff" stroke-width="26" />
+  <polygon points="784,838 834,904 724,838" fill="#ffffff" />
+  <rect x="724" y="824" width="110" height="16" fill="#ffffff" />
+  <circle cx="382" cy="415" r="26" fill="#087691" />
+  <circle cx="472" cy="415" r="26" fill="#25D366" />
+  <circle cx="562" cy="415" r="26" fill="#087691" />
+</svg>
