@@ -10,8 +10,15 @@ html, body, #root {
 }
 
 html, body {
+  position: fixed;
+  overflow: hidden;
+  width: 100%;
   touch-action: manipulation;
   -webkit-text-size-adjust: 100%;
+}
+
+#root {
+  overflow: hidden;
 }
 
 * {
