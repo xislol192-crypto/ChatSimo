@@ -260,6 +260,22 @@ export default function ChatSimulator() {
   const [contacts, setContacts] = useState([]);
   const [groups, setGroups] = useState([]);
   const [communities, setCommunities] = useState([]);
+  const [vh, setVh] = useState(null);
+  useEffect(() => {
+    function updateVh() {
+      if (window.visualViewport) setVh(window.visualViewport.height);
+      else setVh(window.innerHeight);
+    }
+    updateVh();
+    window.visualViewport?.addEventListener("resize", updateVh);
+    window.visualViewport?.addEventListener("scroll", updateVh);
+    window.addEventListener("resize", updateVh);
+    return () => {
+      window.visualViewport?.removeEventListener("resize", updateVh);
+      window.visualViewport?.removeEventListener("scroll", updateVh);
+      window.removeEventListener("resize", updateVh);
+    };
+  }, []);
   const [statuses, setStatuses] = useState([]);
   const [messages, setMessages] = useState({});
   const [callLogs, setCallLogs] = useState([]);
@@ -1289,7 +1305,7 @@ export default function ChatSimulator() {
   }
 
   return (
-    <div className="w-full bg-white flex flex-col overflow-hidden" style={{ height: "100dvh" }} onClick={() => { showFabMenu && setShowFabMenu(false); }}>
+    <div className="w-full bg-white flex flex-col overflow-hidden" style={{ height: vh ? `${vh}px` : "100dvh" }} onClick={() => { showFabMenu && setShowFabMenu(false); }}>
       <div className="flex-1 min-h-0 flex flex-col">
         {screen === "chats" && renderChatsTab()}
         {screen === "calls" && renderCallsTab()}
