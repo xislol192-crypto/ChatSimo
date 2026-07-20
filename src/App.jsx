@@ -913,6 +913,7 @@ export default function ChatSimulator() {
               <div className="flex-1 flex items-center gap-2 rounded-full px-3 py-1" style={{ background: theme.inputBg }}>
                 {!editingMsgId && <Plus size={19} className="text-gray-500 shrink-0" onClick={triggerImagePicker} />}
                 <input value={input} onChange={(e) => setInput(e.target.value)} onKeyDown={(e) => e.key === "Enter" && sendMessage()}
+                  onFocus={() => { [30, 150, 350, 600, 900].forEach((ms) => setTimeout(() => window.scrollTo(0, 0), ms)); }}
                   placeholder={editingMsgId ? "Edit message" : `Message as ${sendAs === "me" ? "yourself" : (contacts.find((c) => c.id === sendAs)?.name.split(" ")[0] || "them")}`}
                   className="flex-1 min-w-0 py-1.5 outline-none text-[14.5px] bg-transparent" style={{ color: "#000" }} />
                 {!editingMsgId && <Smile size={19} className="text-gray-500 shrink-0" />}
@@ -1312,7 +1313,7 @@ export default function ChatSimulator() {
   }
 
   return (
-    <div className="w-full bg-white flex flex-col overflow-hidden" style={{ height: vh ? `${vh}px` : "100dvh", position: "fixed", top: 0, left: 0, right: 0 }} onClick={() => { showFabMenu && setShowFabMenu(false); }}>
+    <div className="w-full bg-white flex flex-col overflow-hidden" style={{ height: vh ? `${vh}px` : "100dvh" }} onClick={() => { showFabMenu && setShowFabMenu(false); }}>
       <div className="flex-1 min-h-0 flex flex-col">
         {screen === "chats" && renderChatsTab()}
         {screen === "calls" && renderCallsTab()}
@@ -1333,4 +1334,3 @@ export default function ChatSimulator() {
     </div>
   );
 }
-
