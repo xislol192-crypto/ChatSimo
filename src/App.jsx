@@ -263,17 +263,24 @@ export default function ChatSimulator() {
   const [vh, setVh] = useState(null);
   useEffect(() => {
     function updateVh() {
-      if (window.visualViewport) setVh(window.visualViewport.height);
-      else setVh(window.innerHeight);
+      const h = window.visualViewport ? window.visualViewport.height : window.innerHeight;
+      setVh(h);
+      // iOS (especially as a home-screen app) can apply its own internal
+      // scroll offset to bring a focused input into view, on top of the
+      // viewport resize. Forcing scroll back to 0,0 cancels that offset so
+      // no blank strip is left between our content and the keyboard.
+      window.scrollTo(0, 0);
     }
     updateVh();
     window.visualViewport?.addEventListener("resize", updateVh);
     window.visualViewport?.addEventListener("scroll", updateVh);
     window.addEventListener("resize", updateVh);
+    window.addEventListener("scroll", updateVh);
     return () => {
       window.visualViewport?.removeEventListener("resize", updateVh);
       window.visualViewport?.removeEventListener("scroll", updateVh);
       window.removeEventListener("resize", updateVh);
+      window.removeEventListener("scroll", updateVh);
     };
   }, []);
   const [statuses, setStatuses] = useState([]);
@@ -1305,7 +1312,7 @@ export default function ChatSimulator() {
   }
 
   return (
-    <div className="w-full bg-white flex flex-col overflow-hidden" style={{ height: vh ? `${vh}px` : "100dvh" }} onClick={() => { showFabMenu && setShowFabMenu(false); }}>
+    <div className="w-full bg-white flex flex-col overflow-hidden" style={{ height: vh ? `${vh}px` : "100dvh", position: "fixed", top: 0, left: 0, right: 0 }} onClick={() => { showFabMenu && setShowFabMenu(false); }}>
       <div className="flex-1 min-h-0 flex flex-col">
         {screen === "chats" && renderChatsTab()}
         {screen === "calls" && renderCallsTab()}
@@ -1326,3 +1333,4 @@ export default function ChatSimulator() {
     </div>
   );
 }
+
